@@ -21,7 +21,7 @@ describe("ERC721Enum", function () {
   }
 
   describe("Gas report", function () {
-    it("Mint 10 NFT one by one", async function () {
+    it("Mint, Burn, Transfer", async function () {
       const { erc721Enum, owner, stranger } = await loadFixture(deployERC721EnumFixture);
 
       for (let i = 0; i < 10; i++) {
@@ -38,6 +38,13 @@ describe("ERC721Enum", function () {
         const tx = await erc721Enum.connect(stranger).burn(i);
         await tx.wait()
       } 
+    })
+
+    it("bulkSafeMint", async function () {
+      const { erc721Enum, owner, stranger } = await loadFixture(deployERC721EnumFixture);
+      for (let i = 0; i < 10; i++) {
+        await erc721Enum.bulkSafeMint(owner.address, 112, i * 112)
+      }
     })
   })
 

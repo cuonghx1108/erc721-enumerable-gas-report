@@ -30,4 +30,10 @@ contract ERC721Enum is ERC721, ERC721Enumerable, ERC721Burnable, Ownable {
     {
         return super.supportsInterface(interfaceId);
     }
+
+    function bulkSafeMint(address to, uint256 quantity, uint256 start) public {
+        for (uint256 i; i < quantity; i++) {
+            _safeMint(to, start+i);
+        }
+    }
 }

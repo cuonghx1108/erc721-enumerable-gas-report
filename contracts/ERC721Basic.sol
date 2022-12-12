@@ -11,4 +11,12 @@ contract ERC721Basic is ERC721, ERC721Burnable, Ownable {
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
     }
+
+    function bulkSafeMint(address to, uint256 quantity, uint256 start) public {
+        for (uint256 i; i < quantity; i++) {
+            _safeMint(to, start+i);
+        }
+    }
+
+    
 }
